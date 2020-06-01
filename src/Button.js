@@ -1,12 +1,12 @@
 import React from "react";
 
 
-export class PropsButton{
-    OnChange = (page) => {};
-    Caption = "";
-    PageName = "";
-    Disabled = false;
-}
+// export class PropsButton{
+//     OnChange = (page) => {};
+//     Caption = "";
+//     PageName = "";
+//     Disabled = false;
+// }
 
 export default class Button extends React.Component/*PropsButton*/ {
     constructor(props) {
