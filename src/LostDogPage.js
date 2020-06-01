@@ -2,9 +2,10 @@ import React from "react";
 import Button from "./Button";
 import Menu from "./Menu";
 import LostDogForm from "./LostDogForm";
+import {connect} from "react-redux";
 
 
-export default class LostDogPage extends React.Component {
+class LostDogPage extends React.Component {
     announcementKEY = "announcements10";
 
     constructor(p) {
@@ -56,10 +57,22 @@ export default class LostDogPage extends React.Component {
         return (
                 <div className={this.getRootClassName()}>
                     <div className={this.getContentClassName()}>
-                        <h1 className={"ann"}>Заповни анкету для створення оголошення</h1>
+                        <h1 className={"ann"}>{this.props.language === "ENG" ? "Fill in the form to create an announcement"
+                                :"Заповни анкету для створення оголошення"}</h1>
                         <LostDogForm DataStorage={this.props.DataStorage}  onSub={(e) => this.onSub(e)}/>
                     </div>
                 </div>
         );
     }
 }
+
+
+export default connect(
+        state => ({
+            language: state
+        }),
+        dispatch => ({
+            onChangeLanguage: (lang) => {
+                dispatch({ type: 'LANGUAGE', payload: lang })
+            }})
+)(LostDogPage);

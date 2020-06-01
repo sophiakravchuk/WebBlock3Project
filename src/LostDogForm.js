@@ -1,7 +1,8 @@
 import React from "react";
 import AnnouncementData from "./AnnouncementData";
+import {connect} from "react-redux";
 
-export default class LostDogForm extends React.Component {
+class LostDogForm extends React.Component {
     constructor(props) {
         super(props);
         this.lostDogRef = React.createRef();
@@ -43,11 +44,7 @@ export default class LostDogForm extends React.Component {
         const name = target.name;
         const size = target.size;
 
-        // const value = target.name = target.value;
-        // const name = target.name;
-        // if (name === "filename"){
 
-        // }
         this.setState({
             [event.target.name]: event.target.value
         });
@@ -92,7 +89,7 @@ export default class LostDogForm extends React.Component {
                     <form onSubmit={(e) => this.handleSubmit(e)}>
                         <div className="row">
                             <div className="col-25">
-                                <label  htmlFor="name">Твоє ім'я:</label>
+                                <label  htmlFor="name">{this.props.language === "ENG" ? "Your name:" :"Твоє ім'я:"}</label>
                             </div>
                             <div className="col-75">
                                 <input
@@ -101,12 +98,12 @@ export default class LostDogForm extends React.Component {
                                         type="text"
                                         value={this.state.name}
                                         onChange={(e) => this.handleInputChange(e)}
-                                        placeholder="Твоє ім'я"/>
+                                        placeholder={this.props.language === "ENG" ? "Your name" :"Твоє ім'я"}/>
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-25">
-                                <label  htmlFor="phoneNumber">Контактний номер телефону:</label>
+                                <label  htmlFor="phoneNumber">{this.props.language === "ENG" ? "Contact phone number:" : "Контактний номер телефону:"}</label>
                             </div>
                             <div className="col-75">
                                 <input ref={this.lostDogRef}
@@ -119,7 +116,7 @@ export default class LostDogForm extends React.Component {
                         </div>
                         <div className="row">
                             <div className="col-25">
-                                <label htmlFor="email">Твій Email:</label>
+                                <label htmlFor="email">{this.props.language === "ENG" ? "Your Email:" : "Твій Email:"}</label>
                             </div>
                             <input ref={this.lostDogRef}
                                    name="email"
@@ -129,7 +126,7 @@ export default class LostDogForm extends React.Component {
                         </div>
                         <div className="row">
                             <div className="col-25">
-                                <label htmlFor="dogsname">Кличка собаки:</label>
+                                <label htmlFor="dogsname">{this.props.language === "ENG" ? "Dog's name:" : "Кличка собаки:"}</label>
                             </div>
                                 <input
                                         ref={this.lostDogRef}
@@ -143,7 +140,7 @@ export default class LostDogForm extends React.Component {
 
                         <div className="row">
                             <div className="col-25">
-                                <label htmlFor="dogsbread">Порода собаки:</label>
+                                <label htmlFor="dogsbread">{this.props.language === "ENG" ? "Dog's breed:" : "Порода собаки:"}</label>
                             </div>
 
                             <input
@@ -157,7 +154,7 @@ export default class LostDogForm extends React.Component {
 
                         <div className="row">
                             <div className="col-25">
-                                <label htmlFor="location">Локація:</label>
+                                <label htmlFor="location">{this.props.language === "ENG" ? "Location:" : "Локація:"}</label>
                             </div>
 
                             <input
@@ -171,7 +168,8 @@ export default class LostDogForm extends React.Component {
                         </div>
                         <div className="row">
                             <div className="col-25">
-                                <label htmlFor="file">Фото собаки:</label>
+                                <label htmlFor="file">{this.props.language === "ENG" ? "Dog's photo (max 10Kb):"
+                                        : "Фото собаки(максимум 10 Кб):"}</label>
                             </div>
                             <input
                                     ref={this.lostDogRef}
@@ -186,7 +184,7 @@ export default class LostDogForm extends React.Component {
 
                         <div className="row">
                             <div className="col-25">
-                                <label htmlFor="message">Що трапилося:</label>
+                                <label htmlFor="message">{this.props.language === "ENG" ? "What happened:" : "Що трапилося:"}</label>
                             </div>
                             <div className="col-75">
                                 <textarea
@@ -198,7 +196,9 @@ export default class LostDogForm extends React.Component {
                             </div>
                         </div>
                         <div className="row">
-                            <input type="submit" value={this.state.uploading ? "Завантаження" :"Надіслати"}/>
+                            <input type="submit" value={this.props.language === "ENG" ?
+                                    (this.state.uploading ? "Loading" :"Send")
+                                    :(this.state.uploading ? "Завантаження" :"Надіслати")}/>
                         </div>
                     </form>
                     </fieldset>
@@ -207,4 +207,13 @@ export default class LostDogForm extends React.Component {
     }
 }
 
+export default connect(
+        state => ({
+            language: state
+        }),
+        dispatch => ({
+            onChangeLanguage: (lang) => {
+                dispatch({ type: 'LANGUAGE', payload: lang })
+            }})
+)(LostDogForm);
 

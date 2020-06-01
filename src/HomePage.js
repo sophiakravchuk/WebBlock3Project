@@ -1,9 +1,10 @@
 import React from "react";
 import Button from "./Button";
 import Menu from "./Menu";
+import {connect} from "react-redux";
 
 
-export default class HomePage extends React.Component {
+class HomePage extends React.Component {
     constructor(p) {
         super(p);
         console.log(this.props.CurrPage)
@@ -26,10 +27,10 @@ export default class HomePage extends React.Component {
         return (
                 <div className={this.getRootClassName()}>
                     <div className={this.getContentClassName()}>
-                        <h1>Хочеш собачку?</h1>
+                        <h1>{this.props.language === "ENG" ? "Do you want a dog?" : "Хочеш собачку?" }</h1>
                         <div className="btns">
                             <Button
-                                    Caption={"Чому собачка?"}
+                                    Caption={this.props.language === "ENG" ? "Why a dog?" : "Чому собачка?"}
                                     PageName={Menu.PAGE_WHYDOG}
                                     Disabled={false}
                                     OnChange={(p) => {
@@ -37,7 +38,7 @@ export default class HomePage extends React.Component {
                                     }}
                             />
                             <Button
-                                    Caption={"Дізнатися більше"}
+                                    Caption={this.props.language === "ENG" ? "Learn more" : "Дізнатися більше"}
                                     PageName={Menu.PAGE_POPDOGS}
                                     Disabled={false}
                                     OnChange={(p) => {
@@ -50,3 +51,14 @@ export default class HomePage extends React.Component {
         );
     }
 }
+
+
+export default connect(
+        state => ({
+            language: state
+        }),
+        dispatch => ({
+            onChangeLanguage: (lang) => {
+                dispatch({ type: 'LANGUAGE', payload: lang })
+            }})
+)(HomePage);

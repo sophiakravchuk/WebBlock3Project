@@ -5,8 +5,9 @@ import LostDogForm from "./LostDogForm";
 import AnnouncementData from "./AnnouncementData";
 
 import load from "./images/original.gif";
+import {connect} from "react-redux";
 
-export default class AnnsPage extends React.Component {
+class AnnsPage extends React.Component {
     SECRET_KEY = "5ec85a212e188977295aefec";
     announcementKEY = "announcements10";
     constructor(p) {
@@ -108,19 +109,8 @@ export default class AnnsPage extends React.Component {
             return (
                     <div className={this.getRootClassName()}>
                         <div className={this.getContentClassName()}>
-                            <h1 className={"ann"}>Останні оголошення</h1>
+                            <h1 className={"ann"}>{this.props.language === "ENG" ? "Latest announcements" :"Останні оголошення"}</h1>
                             {this.renderAnns()}
-                            {/*<div className="parent">*/}
-                            {/*    <Slider>*/}
-                            {/*        {data.map(value => {*/}
-                            {/*            return (*/}
-                            {/*                    <div key={value} className="child">*/}
-                            {/*                        {value}*/}
-                            {/*                    </div>*/}
-                            {/*            );*/}
-                            {/*        })}*/}
-                            {/*    </Slider>*/}
-                            {/*</div>*/}
 
                         </div>
                     </div>
@@ -137,3 +127,14 @@ export default class AnnsPage extends React.Component {
         }
     }
 }
+
+
+export default connect(
+        state => ({
+            language: state
+        }),
+        dispatch => ({
+            onChangeLanguage: (lang) => {
+                dispatch({ type: 'LANGUAGE', payload: lang })
+            }})
+)(AnnsPage);
