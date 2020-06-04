@@ -7,23 +7,32 @@ export class PropsMenu{
 }
 
 export default class Menu extends React.Component/*PropsMenu*/ {
+    static PAGE_WHYDOG = "whydog";
+    static PAGE_HOME = "home";
+    static PAGE_POPDOGS = "popdogs";
+    static PAGE_COMPARE = "comparedogs";
     constructor(props) {
-        super();
+        super(props);
+        this.names = {};
+        this.names[Menu.PAGE_HOME] = "Головна";
+        this.names[Menu.PAGE_WHYDOG] = "Чому собачка?";
+        this.names[Menu.PAGE_POPDOGS] = "Популярні породи";
+        this.names[Menu.PAGE_COMPARE] = "Порівняти";
     }
 
     getClassName(p) {
-        let classNames = ["holpage", "whydog", "poppage", "comparepage"];
-        return classNames[p];
+        // let classNames = [Menu.PAGE_HOME, Menu.PAGE_WHYDOG, Menu.PAGE_POPDOGS, Menu.PAGE_COMPARE];
+
+        return p.concat("MenuButton");
     }
 
     renderSubMenus(curPage) {
-        let names = ["Головна", "Чому пес?", "Популярні породи", "Порівняти"];
         let result = [];
-        for (let p in names) {
+        for (let p in this.names) {
             result.push(
                 (
-                    <div className={this.getClassName(p)} onClick={() => this.props.OnChange(p)}>
-                        {names[p]}
+                    <div key={p} className={this.getClassName(p)} onClick={() => this.props.OnChange(p)}>
+                        {this.names[p]}
                     </div>
                 )
             );

@@ -3,37 +3,42 @@ import Menu from "./Menu";
 import PagesContent from "./PagesContent";
 
 
-export class Page extends React.Component {
-    constructor() {
-        super();
 
-        this.state = {
-            CurrPage: 0
-        };
+export class Page extends React.Component {
+    constructor(p) {
+        super(p);
+        console.log(this.props.CurrPage)
+        // this.state = {
+        //     CurrPage: 0
+        // };
     }
 
-    getRootClassName(){
-        var totn_string = 'page';
-        return totn_string.concat(this.state.CurrPage);
+    OnCnangePage(pageId) {
+        window.location = pageId
+    }
+
+    getRootClassName() {
+        return this.props.CurrPage;
     }
 
     render() {
         return (
                 <div
-                    className={this.getRootClassName()}
+                        className={this.getRootClassName()}
                 >
                     <Menu
                             OnChange={(p) => {
-                                this.setState({CurrPage: p});
+                                this.OnCnangePage(p)
                             }}
-                            CurrPage={this.state.CurrPage}
+                            CurrPage={this.props.CurrPage}
                     >
                     </Menu>
+
                     <PagesContent
                             OnChange={(p) => {
-                                this.setState({CurrPage: p});
+                                this.OnCnangePage(p)
                             }}
-                            pageNumber={this.state.CurrPage}/>
+                            pageName={this.props.CurrPage}/>
                 </div>
         );
     }
