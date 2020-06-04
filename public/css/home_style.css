@@ -1,0 +1,114 @@
+*
+{
+    margin: 0;
+    padding: 0;
+
+}
+
+.html{
+    height: 100vh;
+}
+
+.App
+{
+    position: absolute;
+    height: 100%;
+    overflow: scroll;
+
+    width: 100%;
+
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+
+.page0
+{
+    background-image: linear-gradient(
+            rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+    url("../group-of-dogs.jpg");
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+}
+
+.main-nav
+{
+    right: 40px;
+    z-index: 9999;
+    list-style: none;
+    position: fixed; /
+    top: 0;
+}
+
+.holpage, .whydog, .poppage, .comparepage{
+    display: inline-block;
+    margin-top: 30px;
+    color: white;
+    text-decoration: none;
+    padding: 5px 20px;
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+}
+
+.holpage{
+    border: 1px solid white;
+}
+
+.whydog:hover, .poppage:hover, .comparepage:hover {
+    border: 1px solid white;
+}
+
+.page0Content
+{
+    position: absolute;
+    margin-left: 0;
+    margin-top: 5%;
+    width:100%;
+}
+
+h1
+{
+    color: white;
+    text-transform: uppercase;
+    font-size: 70px;
+    text-align: center;
+    margin-top: 10%;
+    margin-right: 25%;
+
+}
+
+
+.btns {
+    display: table;
+    margin-left: 25%;
+    border-spacing: 20px;
+}
+
+.button
+{
+    display: table-cell;
+    margin-top: 5%;
+    margin-right: 10%;
+
+    border: 1px solid white;
+    padding: 8px 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    text-transform: uppercase;
+    font-family: "Roboto", sans-serif;
+}
+
+.button:hover
+{
+    background-color: darkolivegreen;
+    transition: all 0.5s ease-in;
+}
+
+body
+{
+    font-family: monospace;
+}
+
